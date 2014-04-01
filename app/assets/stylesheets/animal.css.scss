@@ -1,0 +1,46 @@
+// Place all the styles related to the animal controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+td{
+  border: 1px solid black;
+  padding: 5px;
+  margin: 30px;
+  text-align: center;
+}
+
+table {
+  width: 40%;
+  float: left;
+}
+
+#recentSightings {
+
+}
+
+
+span {
+   cursor: pointer;
+   color: blue;
+   text-decoration: underline;
+}
+
+div{
+  margin-bottom:3%;
+  width: 25%;
+  border: 1px solid black;
+  padding:5px;
+  padding-bottom: 20px;
+}
+strong{
+  margin-left: 2%;
+   cursor: pointer;
+   color: blue;
+   text-decoration: underline;
+
+}
+
+#search_species, #search_regions{
+  display: none;
+}

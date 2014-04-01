@@ -1,0 +1,123 @@
+<h1> WELCOME TO THE JUNGLE </h1>
+
+<h3> Click a species and then a region to add a sighting</h3>
+<h3>Add a Species</h3>
+<form action="/animals/" method="post">
+  <label for="animal_species">Species:</label>
+  <input for="animal_species" name="animal[species]" type="text">
+  <button>Add Species</button>
+</form>
+
+
+
+<h3>Species:</h3>
+<ul>
+<% @animals.each do |animal| %>
+  <li class="<%=animal.id%>">
+    <span class="sighting" id="species-<%=animal.id%>"><%= animal.species %></span> | <span class="edit"> Edit</span>
+     </li>
+  <% end %>
+</ul>
+
+<h3>Add a Region</h3>
+<form action="/regions/" method="post">
+  <label for="region_name">Region:</label>
+  <input for="region_name" name="region[name]" type="text">
+  <button>Add Region</button>
+</form>
+
+
+
+<h3>Regions:</h3>
+<ul>
+<% @regions.each do |region| %>
+  <li class="<%=region.id%>">
+    <span class="sighting" id="region-<%=region.id%>"><%= region.name %></span> | <span class="edit"> Edit</span>
+  <% end %>
+</ul>
+
+<div class='reports'>
+<h3>Custom Reports:</h3>
+<strong id='byDate'>By Date</strong>
+<strong id='bySpecies'>By Species</strong>
+<strong id='byRegion'>By Region</strong>
+
+
+<form id='search_species' action="/sightings/search_species" method="get">
+<select name="sightings[animal_id]">
+  <% @animals.each do |animal| %>
+    <option value="<%= animal.id %>"><%= animal.species %> </option>
+  <% end %>
+  <input type="submit" value="Search">
+</select>
+</form>
+
+<form id='search_regions' action="/sightings/search_regions" method="get">
+<select name="sightings[region_id]">
+  <% @regions.each do |region| %>
+    <option value="<%= region.id %>"><%= region.name %> </option>
+  <% end %>
+  <input type="submit" value="Search">
+</select>
+</form>
+
+</div>
+
+
+
+
+<table id="newSightings">
+    <tr >
+    <td colspan=4>New Sighting</td>
+  </tr>
+  <tr>
+    <td>
+      Species
+    </td>
+    <td>
+      Region
+    </td>
+    <td>
+      Date
+    </td>
+    <td>
+      Time
+    </td>
+</table>
+
+<table id="recentSightings">
+  <tr >
+    <td colspan=4>All Sightings</td>
+  </tr>
+  <tr>
+    <td>
+      Species
+    </td>
+    <td>
+      Region
+    </td>
+    <td>
+      Date
+    </td>
+    <td>
+      Time
+    </td>
+  </tr>
+    <% @sightings.each do |sighting| %>
+    <tr>
+      <td><%= Animal.find(sighting.animal_id).species %>  </td>
+      <td><%= Region.find(sighting.region_id).name %></td>
+      <td> <%= sighting.date.strftime("%m/%d/%Y") %></td>
+      <td> <%= sighting.time.strftime("%I:%M %p") %></td>
+    </tr>
+    <% end %>
+</table>
+
+
+<form action="/sightings/" method="post" id='sightingsPost'>
+  <input id='animal_id' for="animal_id" name="sighting[animal_id]" type="hidden" value="">
+  <input id='region_id' for="region_id" name="sighting[region_id]" type="hidden" value=''>
+  <input id='date' for="date" name="sighting[date]" type="hidden" value="">
+  <input id='time' for="time" name="sighting[time]" type="hidden" value="">
+</form>
+

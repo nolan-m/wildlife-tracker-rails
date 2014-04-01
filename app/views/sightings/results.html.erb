@@ -1,0 +1,35 @@
+<h1> Report Results!</h1>
+
+<table>
+  <tr >
+    <td colspan=4>Sightings within date range</td>
+  </tr>
+  <tr>
+    <td>
+      Species
+    </td>
+    <td>
+      Region
+    </td>
+    <td>
+      Date
+    </td>
+    <td>
+      Time
+    </td>
+  </tr>
+    <% @sightings.each do |sighting| %>
+    <tr>
+      <td><%= Animal.find(sighting.animal_id).species %>  </td>
+      <td><%= Region.find(sighting.region_id).name %></td>
+      <td> <%= sighting.date.strftime("%m/%d/%Y") %></td>
+      <td> <%= sighting.time.strftime("%I:%M %p") %></td>
+    </tr>
+    <% end %>
+</table>
+</br>
+
+<p>
+
+<a href="/animals/">Go Back</a>
+</p>
